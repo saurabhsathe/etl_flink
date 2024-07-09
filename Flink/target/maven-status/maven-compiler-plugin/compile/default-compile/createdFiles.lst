@@ -1,7 +1,3 @@
-Dto\Transaction.class
-Deserializer\JSONValueDeserializationSchema.class
-Dto\SalesPerDay.class
-Dto\SalesPerCategory.class
-Dto\SalesPerMonth.class
-utils\JsonUtil.class
+model\Transaction.class
 FlinkCommerce\DataStreamJob.class
+Deserializer\JSONValueDeserializationSchema.class
