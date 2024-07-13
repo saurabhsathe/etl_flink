@@ -106,6 +106,49 @@ public class DataStreamJob {
                 jdbcConnectionOptions
         )).name("Insert into transactions table sink");
 
+        transactionStream.addSink(JdbcSink.sink(
+                "CREATE TABLE IF NOT EXISTS sales_per_category (" +
+                        "transaction_date DATE, " +
+                        "category VARCHAR(255), " +
+                        "total_sales DOUBLE PRECISION, " +
+                        "PRIMARY KEY (transaction_date, category)" +
+                        ")",
+                (JdbcStatementBuilder<Transaction>) (preparedStatement, transaction) -> {
+
+                },
+                jdbcExecutionOptions,
+                jdbcConnectionOptions
+        )).name("Create Sales Per Category Table");
+
+        //create sales_per_day table sink
+        transactionStream.addSink(JdbcSink.sink(
+                "CREATE TABLE IF NOT EXISTS sales_per_day (" +
+                        "transaction_date DATE PRIMARY KEY, " +
+                        "total_sales DOUBLE PRECISION " +
+                        ")",
+                (JdbcStatementBuilder<Transaction>) (preparedStatement, transaction) -> {
+
+                },
+                jdbcExecutionOptions,
+                jdbcConnectionOptions
+        )).name("Create Sales Per Day Table");
+
+        //create sales_per_month table sink
+        transactionStream.addSink(JdbcSink.sink(
+                "CREATE TABLE IF NOT EXISTS sales_per_month (" +
+                        "year INTEGER, " +
+                        "month INTEGER, " +
+                        "total_sales DOUBLE PRECISION, " +
+                        "PRIMARY KEY (year, month)" +
+                        ")",
+                (JdbcStatementBuilder<Transaction>) (preparedStatement, transaction) -> {
+
+                },
+                jdbcExecutionOptions,
+                jdbcConnectionOptions
+        )).name("Create Sales Per Month Table");
+
+
         transactionStream.map(
                         transaction -> {
                             Date transactionDate = new Date(System.currentTimeMillis());
