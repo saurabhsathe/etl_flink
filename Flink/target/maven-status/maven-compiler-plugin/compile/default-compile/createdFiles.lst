@@ -2,5 +2,6 @@ model\SalesPerMonth.class
 model\SalesPerDay.class
 Deserializer\JSONValueDeserializationSchema.class
 model\Transaction.class
+utils\JSONUtils.class
 FlinkCommerce\DataStreamJob.class
 model\SalesPerCategory.class
